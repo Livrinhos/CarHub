@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAEPVision</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Inter importada conforme orientação -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. Cabeçalho -->
+    <header>
+        <div class="header-user" id="header-user">
+            <!-- Caso deslogado -->
+            <img src="../anexos_prova/imagens_usuarios/default.png" alt="Perfil" id="user-photo">
+            <span id="user-name">@SAEPVision</span>
+            <button id="btn-perfil" class="btn-dark" disabled>Ver Perfil</button>
+        </div>
+        
+        <div class="header-logo">
+            <h1>SAEPVision</h1>
+        </div>
+
+        <div class="header-login">
+            <button id="btn-abrir-login" class="btn-dark">Login</button>
+            <button id="btn-logout-header" class="btn-dark hidden">Sair</button>
+        </div>
+    </header>
+
+    <!-- 2. Corpo da Aplicação -->
+    <main>
+        <div class="search-section">
+            <div class="search-bar">
+                <input type="text" id="input-pesquisa" placeholder="Digite o nome do fotógrafo... ex: @fotografo1">
+                <button id="btn-pesquisar"><img src="../anexos_prova/icones/lupa.svg" alt="Pesquisar"></button>
+            </div>
+        </div>
+
+        <div class="gallery" id="gallery-container">
+            <!-- Fotos renderizadas via JS aqui -->
+        </div>
+    </main>
+
+    <!-- 3. Rodapé -->
+    <footer>
+        <div class="footer-left">SAEPVision</div>
+        <div class="footer-center">
+            <img src="../anexos_prova/icones/instagram.svg" alt="Instagram">
+            <img src="../anexos_prova/icones/tiktok.svg" alt="TikTok">
+            <img src="../anexos_prova/icones/linkedin.svg" alt="LinkedIn">
+            <img src="../anexos_prova/icones/youtube.svg" alt="YouTube">
+        </div>
+        <div class="footer-right">Copyright 2026-2027</div>
+    </footer>
+
+    <!-- MODAIS -->
+
+    <!-- Modal de Login -->
+    <div id="modal-login" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="close-btn" id="fechar-login">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" id="login-nome" placeholder="Digite seu nome">
+                    <span class="error-msg hidden" id="erro-nome">nome menor que 3 caracteres ou vazio.</span>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-senha" placeholder="Digite sua senha">
+                    <span class="error-msg hidden" id="erro-senha">A senha é obrigatória e não pode estar vazia.</span>
+                </div>
+                <span class="error-msg hidden" id="erro-credenciais">Usuário não encontrado ou senha incorreta.</span>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-outline" id="btn-cancelar-login">Cancelar</button>
+                <button class="btn-dark" id="btn-logar">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Lateral de Perfil -->
+    <div id="menu-lateral" class="menu-lateral hidden">
+        <div class="menu-header">
+            <button class="close-btn" id="fechar-perfil">X</button>
+        </div>
+        <div class="menu-body">
+            <img src="" id="perfil-foto" alt="Foto Perfil">
+            <h3 id="perfil-nome"></h3>
+            <p><span id="perfil-likes">0</span> Likes</p>
+            <p><span id="perfil-publicacoes">0</span> Publicações</p>
+            
+            <button class="btn-borda" id="btn-suas-publicacoes">Suas publicações</button>
+            <button class="btn-borda hidden" id="btn-abrir-cadastro-foto" style="margin-top: 0; border-top: none;">Cadastrar Fotografia</button>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro de Fotografia -->
+    <div id="modal-cadastro-foto" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Cadastro de Fotografia</h2>
+                <button class="close-btn" id="fechar-cadastro-foto">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Título da Imagem</label>
+                    <input type="text" maxlength="300" id="foto-titulo" placeholder="ex.: Dedo de Deus">
+                    <p><span id="contador">0/300</span> </p>
+                    <span class="error-msg hidden" id="erro-foto-titulo">Campo obrigatório.</span>
+                </div>
+                <div class="form-group">
+                    <label>Fonte de origem (Local)</label>
+                    <input type="text" id="foto-local" placeholder="ex.: Rio de Janeiro">
+                    <span class="error-msg hidden" id="erro-foto-local">Campo obrigatório.</span>
+                </div>
+                <div class="form-group">
+                    <label>Imagem</label>
+                    <input type="file" id="foto-arquivo" accept=".jpg, .jpeg, .png, .gif, .webp" style="display: none;">
+                    <button class="btn-outline" id="btn-escolher-arquivo" style="width: 100%;">Escolher arquivo</button>
+                    <span id="nome-arquivo-selecionado">Nenhum arquivo escolhido</span>
+                    <span class="error-msg hidden" id="erro-foto-arquivo">Obrigatório. Apenas JPG, JPEG, PNG, GIF e WEBP.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-dark" id="btn-cadastrar-foto" style="width: 100%;">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

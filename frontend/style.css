@@ -1,0 +1,351 @@
+/* Reset e Variáveis Básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #b3cde0;
+    color: #FFF;
+}
+
+/* Utilitários */
+.hidden {
+    display: none !important;
+}
+
+.btn-dark {
+    background-color: #011f4b;
+    color: #fff;
+    border: 1px solid #011f4b;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-dark:disabled {
+    background-color: #6497b1;
+    border-color: #6497b1;
+    cursor: not-allowed;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #011f4b;
+    border: 1px solid #011f4b;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-borda {
+    background-color: transparent;
+    border: none;
+    border-top: 1px solid #011f4b;
+    border-bottom: 1px solid #011f4b;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.error-msg {
+    color: red;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 1. Cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #011f4b;
+    border-bottom: 1px solid #011f4b;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.header-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    flex: 1;
+    text-align: center;
+}
+
+.header-logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    
+}
+
+/* 2. Corpo */
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 120px);
+}
+
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    border: 1px solid #6497b1;
+    background: #fff;
+    border-radius: 4px;
+    padding: 5px 10px;
+    width: 50%;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    padding: 5px;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar button img {
+    width: 20px;
+}
+
+/* Galeria */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: #011f4b;
+    border: 1px solid #011f4b;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.card-img-container {
+    position: relative;
+    
+}
+
+
+
+.card img.foto-pub {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+    
+}
+
+.card img.foto-pub:hover{
+    transform: scale(1.08);
+}
+
+
+
+/* Efeito Hover na Foto */
+.card-tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card-img-container:hover .card-tooltip {
+    opacity: 1;
+}
+
+.card-info {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.curtir-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.curtir-btn img {
+    width: 24px;
+}
+
+.excluir-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.excluir-btn img {
+    width: 20px;
+}
+
+/* 3. Rodapé */
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #011f4b;
+    color: #FFF;
+    padding: 15px 20px;
+}
+
+.footer-center {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-center img {
+    width: 24px;
+    cursor: pointer;
+}
+
+/* MODAIS E MENUS */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1011f4b;
+}
+
+.modal-content {
+    background: #b3cde0;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    text-align: center;
+    flex: 1;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #6497b1;
+    border-radius: 4px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Menu Lateral */
+.menu-lateral {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: #b3cde0;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+    z-index: 1011f4b;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.menu-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+    height: 100%;
+}
+
+.menu-body img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.menu-body p {
+    margin: 5px 0;
+}
+

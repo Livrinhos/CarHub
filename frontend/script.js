@@ -1,0 +1,370 @@
+// URL Base da API Backend
+const API_URL = 'http://localhost:3000/api';
+// Caminho para as fotos dos anexos
+const CAMINHO_IMAGENS_USUARIOS = '../anexos_prova/imagens_usuarios/';
+
+// Estado Global
+let usuarioLogado = null; // Guardará o objeto do usuário logado
+
+
+// Mapeamento de Elementos DOM
+const btnAbrirLogin = document.getElementById('btn-abrir-login');
+const modalLogin = document.getElementById('modal-login');
+const fecharLogin = document.getElementById('fechar-login');
+const btnCancelarLogin = document.getElementById('btn-cancelar-login');
+const btnLogar = document.getElementById('btn-logar');
+
+const headerUserName = document.getElementById('user-name');
+const headerUserPhoto = document.getElementById('user-photo');
+const btnPerfil = document.getElementById('btn-perfil');
+
+const menuLateral = document.getElementById('menu-lateral');
+const fecharPerfil = document.getElementById('fechar-perfil');
+const btnLogout = document.getElementById('btn-logout-header');
+
+const btnAbrirCadastroFoto = document.getElementById('btn-abrir-cadastro-foto');
+const modalCadastroFoto = document.getElementById('modal-cadastro-foto');
+const fecharCadastroFoto = document.getElementById('fechar-cadastro-foto');
+
+const galleryContainer = document.getElementById('gallery-container');
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+window.onload = () => {
+    const usuarioSalvo = localStorage.getItem('usuarioLogado');
+
+    if (usuarioSalvo) {
+        usuarioLogado = JSON.parse(usuarioSalvo);
+        atualizarInterfaceLogado();
+    }
+
+    carregarPublicacoes();
+};
+
+// ==========================================
+// FUNÇÕES DE LOGIN
+// ==========================================
+btnAbrirLogin.addEventListener('click', () => {
+    modalLogin.classList.remove('hidden');
+    document.getElementById('erro-credenciais').classList.add('hidden');
+});
+
+const fecharModalLogin = () => {
+    modalLogin.classList.add('hidden');
+    document.getElementById('login-nome').value = '';
+    document.getElementById('login-senha').value = '';
+    document.getElementById('erro-nome').classList.add('hidden');
+    document.getElementById('erro-senha').classList.add('hidden');
+};
+
+fecharLogin.addEventListener('click', fecharModalLogin);
+btnCancelarLogin.addEventListener('click', fecharModalLogin);
+
+btnLogar.addEventListener('click', async () => {
+    const nome = document.getElementById('login-nome').value;
+    const senha = document.getElementById('login-senha').value;
+    
+    // Validação frontend simples
+    let valido = true;
+    if (nome.length < 3) {
+        document.getElementById('erro-nome').classList.remove('hidden');
+        valido = false;
+    } else {
+        document.getElementById('erro-nome').classList.add('hidden');
+    }
+    
+    if (senha.trim() === '') {
+        document.getElementById('erro-senha').classList.remove('hidden');
+        valido = false;
+    } else {
+        document.getElementById('erro-senha').classList.add('hidden');
+    }
+
+    if (!valido) return;
+
+    try {
+        const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome_usuario: nome, senha: senha })
+        });
+        
+        const data = await response.json();
+        
+        if (data.sucesso) {
+            usuarioLogado = data.usuario;
+            localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario));
+            document.getElementById('erro-credenciais').classList.add('hidden');
+            atualizarInterfaceLogado();
+            fecharModalLogin();
+            carregarPublicacoes(); // Recarrega para ver os status de curtida atuais
+        } else {
+            document.getElementById('erro-credenciais').classList.remove('hidden');
+        }
+    } catch (error) {
+        console.error("Erro no login", error);
+    }
+});
+
+function atualizarInterfaceLogado() {
+    // Atualiza cabeçalho
+    headerUserName.innerText = `@${usuarioLogado.nome_usuario}`;
+    headerUserPhoto.src = `${CAMINHO_IMAGENS_USUARIOS}${usuarioLogado.imagem_usuario}`;
+    btnAbrirLogin.classList.add('hidden');
+    document.getElementById('btn-logout-header').classList.remove('hidden');
+    
+    // Ativa botão perfil se for fotógrafo
+    if (usuarioLogado.tipo === 'fotografo') {
+        btnPerfil.disabled = false;
+        btnAbrirCadastroFoto.classList.remove('hidden');
+    } else {
+        btnPerfil.disabled = true; // usuário comum não acessa perfil/cadastro foto
+    }
+}
+
+// ==========================================
+// MENU LATERAL (PERFIL)
+// ==========================================
+btnPerfil.addEventListener('click', async () => {
+    // Busca infos de curtidas e postagens na API
+    try {
+        const response = await fetch(`${API_URL}/fotografos/${usuarioLogado.id_usuario}/perfil`);
+        const data = await response.json();
+        
+        document.getElementById('perfil-foto').src = `${CAMINHO_IMAGENS_USUARIOS}${usuarioLogado.imagem_usuario}`;
+        document.getElementById('perfil-nome').innerText = usuarioLogado.nome;
+        document.getElementById('perfil-likes').innerText = data.total_likes || 0;
+        document.getElementById('perfil-publicacoes').innerText = data.total_publicacoes || 0;
+        
+        menuLateral.classList.remove('hidden');
+    } catch (error) {
+        console.error("Erro ao abrir perfil", error);
+    }
+});
+
+fecharPerfil.addEventListener('click', () => {
+    menuLateral.classList.add('hidden');
+});
+
+// Logout (Sair)
+document.getElementById('btn-logout-header').addEventListener('click', () => {
+    usuarioLogado = null;
+    localStorage.removeItem('usuarioLogado');
+    headerUserName.innerText = `@SAEPVision`;
+    headerUserPhoto.src = `../anexos_prova/imagens_usuarios/default.png`;
+    btnPerfil.disabled = true;
+    btnAbrirLogin.classList.remove('hidden');
+    document.getElementById('btn-logout-header').classList.add('hidden');
+    btnAbrirCadastroFoto.classList.add('hidden');
+    menuLateral.classList.add('hidden');
+    carregarPublicacoes(); // volta visão deslogada
+});
+
+// ==========================================
+// EXIBIÇÃO DE FOTOS
+// ==========================================
+async function carregarPublicacoes(termoPesquisa = "") {
+    let url = `${API_URL}/publicacoes`;
+    if (usuarioLogado) {
+        url += `?usuarioId=${usuarioLogado.id_usuario}`;
+    }
+    
+    try {
+        if (termoPesquisa) {
+            url = `${API_URL}/fotografos/pesquisa?termo=${encodeURIComponent(termoPesquisa)}`;
+        }
+        
+        const response = await fetch(url);
+        const data = await response.json();
+        
+        galleryContainer.innerHTML = ''; // limpa galeria
+        
+        let publicacoesList = data;
+        
+        // Se for pesquisa, o backend devolve { sucesso, fotografos, publicacoes }
+        if (termoPesquisa && data.sucesso) {
+            publicacoesList = data.publicacoes;
+            if (data.fotografos.length === 0) {
+                galleryContainer.innerHTML = '<p>Fotógrafo não encontrado.</p>';
+                return;
+            }
+        }
+
+        publicacoesList.forEach(pub => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            
+            // Lógica do icone de curtir (coração)
+            const curtido = pub.curtido_por_mim > 0;
+            const coracaoSrc = '../anexos_prova/icones/coracao.svg'; 
+
+            // HTML Interno do Card
+            card.innerHTML = `
+                <div class="card-img-container">
+                    <img src="http://localhost:3000/uploads/${pub.imagem_publicacao}" class="foto-pub" alt="${pub.titulo}">
+                    <div class="card-tooltip">
+                        <p>Tirada por @${pub.nome_fotografo || 'Fotógrafo'} em ${pub.local_tirada}</p>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h3>${pub.titulo}</h3>
+                    <div class="card-actions">
+                        <button class="curtir-btn" onclick="curtirFoto(${pub.id_publicacao}, ${curtido})">
+                            <img src="${coracaoSrc}" alt="Curtir" style="${curtido ? 'filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%);' : ''}">
+                        </button>
+                        <span>${pub.total_curtidas}</span>
+                        ${ (usuarioLogado && usuarioLogado.id_usuario === pub.id_fotografo) ? `
+                            <button class="excluir-btn" onclick="excluirFoto(${pub.id_publicacao})">
+                                <img src="../anexos_prova/icones/lixeira.svg" alt="Excluir" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%);">
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            galleryContainer.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar publicações", error);
+    }
+}
+
+// ==========================================
+// INTERAÇÕES (CURTIR E EXCLUIR)
+// ==========================================
+window.curtirFoto = async (id_publicacao, jaCurtido) => {
+    if (!usuarioLogado) {
+        modalLogin.classList.remove('hidden'); // Usuário não logado, abre login
+        return;
+    }
+
+    try {
+        if (jaCurtido) {
+            // Remove curtida
+            await fetch(`${API_URL}/publicacoes/${id_publicacao}/curtir`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_usuario: usuarioLogado.id_usuario })
+            });
+        } else {
+            // Adiciona curtida
+            await fetch(`${API_URL}/publicacoes/${id_publicacao}/curtir`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_usuario: usuarioLogado.id_usuario })
+            });
+        }
+        carregarPublicacoes(document.getElementById('input-pesquisa').value); // atualiza a interface
+    } catch (error) {
+        console.error("Erro ao curtir", error);
+    }
+}
+
+window.excluirFoto = async (id_publicacao) => {
+    if(confirm("Tem certeza que deseja excluir esta publicação?")) {
+        try {
+            await fetch(`${API_URL}/publicacoes/${id_publicacao}`, { method: 'DELETE' });
+            carregarPublicacoes(document.getElementById('input-pesquisa').value);
+        } catch (error) {
+            console.error("Erro ao excluir", error);
+        }
+    }
+}
+
+// ==========================================
+// PESQUISA
+// ==========================================
+document.getElementById('btn-pesquisar').addEventListener('click', () => {
+    const termo = document.getElementById('input-pesquisa').value;
+    carregarPublicacoes(termo);
+});
+
+// Filtro "Suas Publicações" do menu lateral
+document.getElementById('btn-suas-publicacoes').addEventListener('click', () => {
+    fecharPerfil.click();
+    // Reutiliza a pesquisa buscando pelo nome de usuário logado
+    document.getElementById('input-pesquisa').value = usuarioLogado.nome_usuario;
+    carregarPublicacoes(usuarioLogado.nome_usuario);
+});
+
+// ==========================================
+// CADASTRO DE FOTOGRAFIA
+// ==========================================
+btnAbrirCadastroFoto.addEventListener('click', () => {
+    modalCadastroFoto.classList.remove('hidden');
+});
+
+fecharCadastroFoto.addEventListener('click', () => {
+    modalCadastroFoto.classList.add('hidden');
+    document.getElementById('foto-titulo').value = '';
+    document.getElementById('foto-local').value = '';
+    document.getElementById('foto-arquivo').value = '';
+    document.getElementById('nome-arquivo-selecionado').innerText = 'Nenhum arquivo escolhido';
+});
+
+// Simula click no input file escondido
+document.getElementById('btn-escolher-arquivo').addEventListener('click', () => {
+    document.getElementById('foto-arquivo').click();
+});
+
+document.getElementById('foto-arquivo').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        document.getElementById('nome-arquivo-selecionado').innerText = file.name;
+    } else {
+        document.getElementById('nome-arquivo-selecionado').innerText = 'Nenhum arquivo escolhido';
+    }
+});
+
+document.getElementById('btn-cadastrar-foto').addEventListener('click', async () => {
+    const titulo = document.getElementById('foto-titulo').value;
+    const local = document.getElementById('foto-local').value;
+    const arquivoInput = document.getElementById('foto-arquivo');
+    
+    let valido = true;
+    
+    if(!titulo) { document.getElementById('erro-foto-titulo').classList.remove('hidden'); valido = false; }
+    else { document.getElementById('erro-foto-titulo').classList.add('hidden'); }
+    
+    if(!local) { document.getElementById('erro-foto-local').classList.remove('hidden'); valido = false; }
+    else { document.getElementById('erro-foto-local').classList.add('hidden'); }
+    
+    if(!arquivoInput.files[0]) { document.getElementById('erro-foto-arquivo').classList.remove('hidden'); valido = false; }
+    else { document.getElementById('erro-foto-arquivo').classList.add('hidden'); }
+
+    if(!valido) return;
+
+    const formData = new FormData();
+    formData.append('titulo', titulo);
+    formData.append('local_tirada', local);
+    formData.append('id_fotografo', usuarioLogado.id_usuario);
+    formData.append('imagem', arquivoInput.files[0]);
+
+    try {
+        const response = await fetch(`${API_URL}/publicacoes`, {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        if(data.sucesso) {
+            fecharCadastroFoto.click();
+            carregarPublicacoes(document.getElementById('input-pesquisa').value); // atualiza interface
+        }
+    } catch (error) {
+        console.error("Erro no cadastro da foto", error);
+    }
+});
+
+const campo = document.getElementById("foto-titulo")
+const contador = document.getElementById("contador")
+
+contador.innerHTML = 0/300
+
+campo.addEventListener("input", function(){
+    const atual = campo.value;
+    const comprimentoAtual = atual.length;
+
+    contador.innerHTML = comprimentoAtual + " /300";
+    
+});
