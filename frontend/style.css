@@ -626,18 +626,21 @@ footer {
     display: none;
 }
 
-/* Mantém a área principal livre da barra lateral */
+/* Reserva espaço real para a barra lateral.
+   Quando ela abre, cabeçalho, conteúdo e rodapé acompanham
+   o novo tamanho para nunca ficarem por baixo dela. */
 .site-header,
 main,
 footer {
     margin-left: 74px;
+    transition: margin-left .22s ease;
 }
 
-/* A barra expande sobre o conteúdo, como no Instagram */
-.side-nav:hover ~ .site-header,
-.side-nav:hover ~ main,
-.side-nav:hover ~ footer {
-    /* intencionalmente sem deslocamento */
+/* Evita que a sidebar expandida fique sobre o header ou rodapé. */
+body:has(.side-nav:hover) .site-header,
+body:has(.side-nav:hover) main,
+body:has(.side-nav:hover) footer {
+    margin-left: 245px;
 }
 
 @media (max-width: 620px) {
@@ -671,5 +674,12 @@ footer {
     main,
     footer {
         margin-left: 62px;
+        transition: margin-left .22s ease;
+    }
+
+    body:has(.side-nav:hover) .site-header,
+    body:has(.side-nav:hover) main,
+    body:has(.side-nav:hover) footer {
+        margin-left: 220px;
     }
 }
