@@ -978,3 +978,10 @@ main {
 .side-nav {
     border-right: 1px solid #343438;
 }
+
+
+/* Segurança visual: modal e menu realmente fechados quando possuem .hidden */
+.modal.hidden,
+.menu-lateral.hidden {
+    display: none !important;
+}
