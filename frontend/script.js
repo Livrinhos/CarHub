@@ -387,3 +387,46 @@ campo.addEventListener("input", function(){
     contador.innerHTML = comprimentoAtual + " /300";
     
 });
+
+/* Interações da barra lateral */
+const navHome = document.getElementById('nav-home');
+const navSearch = document.getElementById('nav-search');
+const navProfile = document.getElementById('nav-profile');
+const navCreate = document.getElementById('nav-create');
+const navProfileImage = document.getElementById('nav-profile-image');
+
+navHome?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+navSearch?.addEventListener('click', () => {
+    const input = document.getElementById('input-pesquisa');
+    input?.focus();
+    input?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+
+navProfile?.addEventListener('click', () => {
+    if (usuarioLogado) {
+        btnPerfil.click();
+    } else {
+        modalLogin.classList.remove('hidden');
+    }
+});
+
+navCreate?.addEventListener('click', () => {
+    if (usuarioLogado && usuarioLogado.tipo === 'fotografo') {
+        btnAbrirCadastroFoto.click();
+    } else if (!usuarioLogado) {
+        modalLogin.classList.remove('hidden');
+    }
+});
+
+function atualizarImagemNavPerfil() {
+    if (usuarioLogado?.imagem_usuario) {
+        navProfileImage.src = `${CAMINHO_IMAGENS_USUARIOS}${usuarioLogado.imagem_usuario}`;
+    } else {
+        navProfileImage.src = '../anexos_prova/imagens_usuarios/default.png';
+    }
+}
+
+atualizarImagemNavPerfil();
