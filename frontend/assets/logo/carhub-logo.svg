@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="230" height="69" viewBox="0 0 276 96" role="img" aria-labelledby="title desc">
-  <title id="title">CarHub</title>
-  <desc id="desc">Logo CarHub com Car em branco e Hub em laranja</desc>
-  <text x="4" y="68" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#FFFFFF">Car</text>
-  <rect x="126" y="8" width="150" height="76" rx="9" fill="#FF8700"/>
-  <text x="137" y="68" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="700" fill="#0A0D0E">Hub</text>
-</svg>
