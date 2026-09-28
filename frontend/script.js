@@ -45,7 +45,12 @@ window.onload = () => {
 // ==========================================
 // FUNÇÕES DE LOGIN
 // ==========================================
-btnAbrirLogin.addEventListener('click', () => {
+function abrirModalLogin() {
+    modalLogin.classList.remove('hidden');
+    document.getElementById('erro-credenciais').classList.add('hidden');
+}
+
+btnAbrirLogin?.addEventListener('click', abrirModalLogin);
     modalLogin.classList.remove('hidden');
     document.getElementById('erro-credenciais').classList.add('hidden');
 });
@@ -114,12 +119,16 @@ function atualizarInterfaceLogado() {
     btnAbrirLogin.classList.add('hidden');
     document.getElementById('btn-logout-header').classList.remove('hidden');
     
-    // Ativa botão perfil se for fotógrafo
+    // O botão do perfil fica disponível no header. Para quem não estiver
+    // logado, ele abre o modal de login.
+    btnPerfil.disabled = false;
+
+    // Ativa opções de fotógrafo no menu
     if (usuarioLogado.tipo === 'fotografo') {
         btnPerfil.disabled = false;
         btnAbrirCadastroFoto.classList.remove('hidden');
     } else {
-        btnPerfil.disabled = true; // usuário comum não acessa perfil/cadastro foto
+        btnAbrirCadastroFoto.classList.add('hidden');
     }
 }
 
@@ -127,6 +136,16 @@ function atualizarInterfaceLogado() {
 // MENU LATERAL (PERFIL)
 // ==========================================
 btnPerfil.addEventListener('click', async () => {
+    if (!usuarioLogado) {
+        abrirModalLogin();
+        return;
+    }
+
+    // Usuário comum não possui o menu de fotógrafo.
+    if (usuarioLogado.tipo !== 'fotografo') {
+        return;
+    }
+
     // Busca infos de curtidas e postagens na API
     try {
         const response = await fetch(`${API_URL}/fotografos/${usuarioLogado.id_usuario}/perfil`);
@@ -153,7 +172,7 @@ document.getElementById('btn-logout-header').addEventListener('click', () => {
     localStorage.removeItem('usuarioLogado');
     headerUserName.innerText = `@SAEPVision`;
     headerUserPhoto.src = `../anexos_prova/imagens_usuarios/default.png`;
-    btnPerfil.disabled = true;
+    btnPerfil.disabled = false;
     btnAbrirLogin.classList.remove('hidden');
     document.getElementById('btn-logout-header').classList.add('hidden');
     btnAbrirCadastroFoto.classList.add('hidden');
