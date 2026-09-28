@@ -2439,3 +2439,20 @@ main.home-main {
         width: calc(100% - 24px) !important;
     }
 }
+
+
+/* Mantém as fotos inteiras no feed, sem cortar partes da imagem */
+.feed-image-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #101214;
+}
+
+.feed-image {
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    display: block;
+}
