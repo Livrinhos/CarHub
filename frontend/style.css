@@ -749,3 +749,213 @@ body:has(.side-nav:hover) main {
         width: calc(100% - 220px);
     }
 }
+
+
+/* Layout final para caber exatamente na viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/* O header e o footer ocupam apenas suas próprias faixas. */
+.site-header {
+    height: 64px;
+    min-height: 64px;
+    padding: 6px 28px;
+    margin-left: 74px;
+}
+
+.logo-image {
+    width: 132px;
+}
+
+.header-user {
+    gap: 7px;
+    font-size: 13px;
+}
+
+.header-user img {
+    width: 44px;
+    height: 44px;
+}
+
+.profile-trigger {
+    width: 22px;
+    height: 22px;
+}
+
+.profile-chevron {
+    font-size: 18px;
+}
+
+/* Main usa somente o espaço entre header e footer. */
+main {
+    width: calc(100% - 74px);
+    max-width: none;
+    height: calc(100vh - 114px);
+    min-height: 0;
+    margin-left: 74px;
+    padding: 16px 28px 22px;
+    overflow: hidden;
+}
+
+.search-section {
+    margin: 0 auto 20px;
+}
+
+.search-bar {
+    width: min(650px, 100%);
+    height: 44px;
+}
+
+.search-bar input {
+    font-size: 14px;
+}
+
+.search-bar button {
+    width: 30px;
+    height: 30px;
+}
+
+.search-bar button img {
+    width: 21px;
+    height: 21px;
+}
+
+.gallery {
+    width: min(1020px, 100%);
+    margin: 0 auto;
+    gap: 16px;
+}
+
+.card img.foto-pub {
+    height: 230px;
+}
+
+.card-info {
+    min-height: 46px;
+    padding: 9px 12px;
+}
+
+.card-info h3 {
+    font-size: 14px;
+}
+
+footer {
+    height: 50px;
+    min-height: 50px;
+    margin-left: 74px;
+    padding: 10px 28px;
+}
+
+.footer-left {
+    font-size: 14px;
+}
+
+.footer-center {
+    gap: 12px;
+}
+
+.footer-center img {
+    width: 18px;
+    height: 18px;
+}
+
+.footer-right {
+    font-size: 11px;
+}
+
+/* Quando a navegação abre, tudo acompanha sem criar overflow. */
+body:has(.side-nav:hover) .site-header,
+body:has(.side-nav:hover) main,
+body:has(.side-nav:hover) footer {
+    margin-left: 245px;
+}
+
+main {
+    width: calc(100% - 74px);
+}
+
+body:has(.side-nav:hover) main {
+    width: calc(100% - 245px);
+}
+
+@media (max-width: 900px) {
+    .site-header {
+        height: 60px;
+        min-height: 60px;
+        margin-left: 74px;
+        padding: 6px 20px;
+    }
+
+    main {
+        height: calc(100vh - 110px);
+        padding: 14px 18px 18px;
+        margin-left: 74px;
+        width: calc(100% - 74px);
+    }
+
+    footer {
+        height: 50px;
+        min-height: 50px;
+        margin-left: 74px;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card img.foto-pub {
+        height: 210px;
+    }
+}
+
+@media (max-width: 620px) {
+    .side-nav {
+        width: 62px;
+    }
+
+    .site-header {
+        margin-left: 62px;
+        width: calc(100% - 62px);
+        height: 58px;
+        min-height: 58px;
+        padding: 6px 14px;
+    }
+
+    main,
+    body:has(.side-nav:hover) main {
+        margin-left: 62px;
+        width: calc(100% - 62px);
+        height: calc(100vh - 108px);
+        padding: 12px 12px 16px;
+    }
+
+    footer,
+    body:has(.side-nav:hover) footer {
+        margin-left: 62px;
+        width: calc(100% - 62px);
+    }
+
+    body:has(.side-nav:hover) .site-header {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    body:has(.side-nav:hover) main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    body:has(.side-nav:hover) footer {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+}
