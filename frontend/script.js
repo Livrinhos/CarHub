@@ -55,11 +55,6 @@ function abrirModalLogin() {
 }
 
 btnAbrirLogin?.addEventListener('click', abrirModalLogin);
-<<<<<<< HEAD
-    modalLogin.classList.remove('hidden');
-    document.getElementById('erro-credenciais').classList.add('hidden');
-=======
->>>>>>> ca2fa792b52e235ff3c5c0c1245a650c5e6bffcf
 
 const fecharModalLogin = () => {
     modalLogin.classList.add('hidden');
