@@ -219,28 +219,57 @@ async function carregarPublicacoes(termoPesquisa = "") {
             const curtido = pub.curtido_por_mim > 0;
             const coracaoSrc = '../anexos_prova/icones/coracao.svg'; 
 
-            // HTML Interno do Card
+            // Feed-style card
+            const nomeFotografo = pub.nome_fotografo || 'Fotógrafo';
+            const local = pub.local_tirada || 'Brasil';
+            const curtidas = Number(pub.total_curtidas || 0);
+            const avatar = usuarioLogado?.imagem_usuario
+                ? `${CAMINHO_IMAGENS_USUARIOS}${usuarioLogado.imagem_usuario}`
+                : '../anexos_prova/imagens_usuarios/default.png';
+
             card.innerHTML = `
-                <div class="card-img-container">
-                    <img src="http://localhost:3000/uploads/${pub.imagem_publicacao}" class="foto-pub" alt="${pub.titulo}">
-                    <div class="card-tooltip">
-                        <p>Tirada por @${pub.nome_fotografo || 'Fotógrafo'} em ${pub.local_tirada}</p>
+                <article class="feed-post">
+                    <header class="feed-post-header">
+                        <div class="feed-user">
+                            <img src="${avatar}" alt="">
+                            <div>
+                                <strong>@${nomeFotografo}</strong>
+                                <span><span class="post-dot">•</span> 2h atrás</span>
+                            </div>
+                        </div>
+                        <button class="post-menu" type="button" aria-label="Mais opções">•••</button>
+                    </header>
+
+                    <div class="feed-location">⌖ ${local}</div>
+                    <p class="feed-caption">${pub.titulo || 'Mais um carro incrível no CarHub!'} <span>🔥</span></p>
+
+                    <div class="feed-image-wrap">
+                        <img src="http://localhost:3000/uploads/${pub.imagem_publicacao}" class="foto-pub feed-image" alt="${pub.titulo || 'Publicação'}">
                     </div>
-                </div>
-                <div class="card-info">
-                    <h3>${pub.titulo}</h3>
-                    <div class="card-actions">
-                        <button class="curtir-btn" onclick="curtirFoto(${pub.id_publicacao}, ${curtido})">
-                            <img src="${coracaoSrc}" alt="Curtir" style="${curtido ? 'filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%);' : ''}">
-                        </button>
-                        <span>${pub.total_curtidas}</span>
+
+                    <div class="feed-actions">
+                        <div class="feed-actions-left">
+                            <button class="feed-action like-action ${curtido ? 'liked' : ''}" onclick="curtirFoto(${pub.id_publicacao}, ${curtido})" aria-label="Curtir">
+                                <span class="feed-heart">♥</span>
+                                <span class="feed-action-count">${curtidas}</span>
+                            </button>
+                            <button class="feed-action" type="button" aria-label="Comentar">
+                                <span class="feed-comment-icon">◯</span>
+                                <span class="feed-action-count">0</span>
+                            </button>
+                            <button class="feed-action" type="button" aria-label="Compartilhar">
+                                <span class="feed-share-icon">⌁</span>
+                                <span class="feed-action-count">0</span>
+                            </button>
+                        </div>
+                        <button class="feed-bookmark" type="button" aria-label="Salvar">♡</button>
                         ${ (usuarioLogado && usuarioLogado.id_usuario === pub.id_fotografo) ? `
-                            <button class="excluir-btn" onclick="excluirFoto(${pub.id_publicacao})">
-                                <img src="../anexos_prova/icones/lixeira.svg" alt="Excluir" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%);">
+                            <button class="excluir-btn feed-delete" onclick="excluirFoto(${pub.id_publicacao})" aria-label="Excluir">
+                                🗑
                             </button>
                         ` : ''}
                     </div>
-                </div>
+                </article>
             `;
             galleryContainer.appendChild(card);
         });
@@ -525,3 +554,53 @@ document.getElementById('message-new-btn')?.addEventListener('click', () => {
 document.getElementById('chat-start-btn')?.addEventListener('click', () => {
     chatInput?.focus();
 });
+
+
+/* Interações do feed principal */
+const composerFocus = document.getElementById('composer-focus');
+const composerPublish = document.getElementById('composer-publish');
+const composerPhoto = document.getElementById('composer-photo');
+const composerAvatar = document.getElementById('composer-avatar');
+const composerMention = document.getElementById('composer-mention');
+const feedRefresh = document.getElementById('feed-refresh');
+
+function atualizarComposer() {
+    if (usuarioLogado?.imagem_usuario) {
+        composerAvatar.src = `${CAMINHO_IMAGENS_USUARIOS}${usuarioLogado.imagem_usuario}`;
+    } else {
+        composerAvatar.src = '../anexos_prova/imagens_usuarios/default.png';
+    }
+    if (composerMention) {
+        composerMention.textContent = usuarioLogado?.nome_usuario
+            ? `@${usuarioLogado.nome_usuario}`
+            : '@fotografo_1';
+    }
+}
+
+composerFocus?.addEventListener('click', () => {
+    if (!usuarioLogado) {
+        abrirModalLogin();
+        return;
+    }
+    document.getElementById('btn-abrir-cadastro-foto')?.click();
+});
+
+composerPublish?.addEventListener('click', () => {
+    if (!usuarioLogado) {
+        abrirModalLogin();
+        return;
+    }
+    document.getElementById('btn-abrir-cadastro-foto')?.click();
+});
+
+composerPhoto?.addEventListener('click', () => {
+    if (!usuarioLogado) {
+        abrirModalLogin();
+        return;
+    }
+    document.getElementById('btn-abrir-cadastro-foto')?.click();
+});
+
+feedRefresh?.addEventListener('click', () => carregarPublicacoes(document.getElementById('input-pesquisa')?.value || ''));
+
+atualizarComposer();
