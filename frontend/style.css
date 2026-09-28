@@ -683,3 +683,41 @@ body:has(.side-nav:hover) footer {
         margin-left: 220px;
     }
 }
+
+
+/* Harmonia entre sidebar e header */
+.side-nav {
+    top: 0;
+    bottom: 0;
+    height: 100dvh;
+    background: var(--header);
+    border-right: 1px solid #111619;
+}
+
+.site-header {
+    background: var(--header);
+    border-bottom: 1px solid #111619;
+    min-height: 72px;
+    height: 72px;
+}
+
+/* A área do conteúdo começa exatamente após o header,
+   sem criar uma faixa visual deslocada junto à sidebar. */
+main {
+    background: var(--bg);
+    min-height: calc(100vh - 72px);
+}
+
+/* Retira o bloco visual separado da marca no topo da sidebar.
+   A identidade continua sendo a mesma do header. */
+.side-brand {
+    padding-left: 6px;
+}
+
+.brand-mark {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    font-size: 22px;
+}
