@@ -2150,3 +2150,292 @@ body:has(.side-nav:hover) main.home-main {
 .error-msg {
     color: #ff6b6b;
 }
+
+
+/* ==========================================
+   NAVBAR FINAL — botões mais limpos e modernos
+   ========================================== */
+.side-nav {
+    width: 82px;
+    padding: 16px 12px 20px;
+    background: #090b0d;
+    border-right: 1px solid #2b2e31;
+    box-shadow: 4px 0 18px rgba(0,0,0,.12);
+}
+
+.side-nav:hover {
+    width: 250px;
+}
+
+.side-nav-top {
+    min-height: 54px;
+    margin-bottom: 26px;
+}
+
+.side-brand {
+    height: 46px;
+    padding: 0 7px;
+    gap: 14px;
+}
+
+.brand-mark {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 23px;
+    box-shadow: 0 3px 10px rgba(255,135,0,.18);
+}
+
+.brand-label {
+    color: #fff;
+    font-size: 19px;
+}
+
+.side-nav-menu {
+    gap: 4px;
+}
+
+.side-nav-bottom {
+    gap: 4px;
+}
+
+.side-nav-item {
+    height: 48px;
+    padding: 0 9px;
+    gap: 15px;
+    border-radius: 11px;
+    color: #f3f4f5;
+    font-size: 14px;
+    transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.side-nav-item:hover {
+    background: #1a1d20;
+    color: #fff;
+}
+
+.side-nav-item:active {
+    transform: scale(.985);
+}
+
+.side-nav-item.active {
+    background: var(--orange);
+    color: #111315;
+    font-weight: 700;
+}
+
+.side-nav-item.active:hover {
+    background: #ff9418;
+    color: #111315;
+}
+
+.side-nav-item.active .nav-icon {
+    color: #111315;
+}
+
+.nav-icon {
+    flex: 0 0 34px;
+    width: 25px;
+    height: 25px;
+    color: currentColor;
+}
+
+.nav-profile-image {
+    flex: 0 0 30px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #6c7176;
+}
+
+.side-nav-item.active .nav-profile-image {
+    border-color: #111315;
+}
+
+.nav-label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.side-nav-item.active .nav-label {
+    font-weight: 700;
+}
+
+.nav-badge {
+    left: 34px;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    background: #ff3040;
+    border: 2px solid #090b0d;
+}
+
+/* ==========================================
+   PERFIL — visual integrado ao tema escuro
+   ========================================== */
+.menu-lateral {
+    width: 360px;
+    background: #17191b;
+    color: #f4f5f6;
+    border-left: 1px solid #303337;
+    box-shadow: -14px 0 38px rgba(0,0,0,.34);
+    padding: 18px;
+}
+
+.menu-header {
+    padding-bottom: 8px;
+}
+
+.menu-header .close-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    color: #dfe1e3;
+    background: #222528;
+    display: grid;
+    place-items: center;
+    transition: background .18s ease, color .18s ease;
+}
+
+.menu-header .close-btn:hover {
+    background: #2c3034;
+    color: var(--orange);
+}
+
+.menu-body {
+    margin-top: 10px;
+    align-items: stretch;
+    text-align: center;
+}
+
+.menu-body img {
+    width: 108px;
+    height: 108px;
+    margin: 4px auto 14px;
+    border: 3px solid var(--orange);
+    box-shadow: 0 8px 24px rgba(0,0,0,.22);
+}
+
+.menu-body h3 {
+    color: #fff;
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+.menu-body p {
+    color: #8d9398;
+    margin: 3px 0;
+    font-size: 13px;
+}
+
+.menu-body p span {
+    color: #fff;
+    font-weight: 700;
+}
+
+.btn-borda {
+    color: #f2f3f4;
+    background: #202326;
+    border: 1px solid #303438;
+    border-radius: 9px;
+    padding: 12px 13px;
+    margin: 7px 0;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.btn-borda:hover {
+    background: #282c30;
+    border-color: #484d52;
+    color: #fff;
+}
+
+#btn-abrir-cadastro-foto {
+    color: #111315;
+    background: var(--orange);
+    border-color: var(--orange);
+}
+
+#btn-abrir-cadastro-foto:hover {
+    background: #ff981f;
+    border-color: #ff981f;
+}
+
+#btn-logout-header {
+    color: #ff7777;
+    background: transparent;
+    border-color: #493133;
+}
+
+#btn-logout-header:hover {
+    background: #2b2022;
+    border-color: #6a3b40;
+}
+
+/* Perfil do header */
+.header-user {
+    padding: 5px 7px 5px 6px;
+    border-radius: 12px;
+    transition: background .18s ease;
+}
+
+.header-user:hover {
+    background: #15191c;
+}
+
+.profile-trigger {
+    border-radius: 8px;
+}
+
+.profile-trigger:hover {
+    background: #202428;
+}
+
+/* Reserva de espaço compatível com a nova largura da sidebar */
+.site-header,
+main,
+footer,
+.messages-page {
+    margin-left: 82px;
+    transition: margin-left .22s ease;
+}
+
+body:has(.side-nav:hover) .site-header,
+body:has(.side-nav:hover) main,
+body:has(.side-nav:hover) footer,
+body:has(.side-nav:hover) .messages-page {
+    margin-left: 250px;
+}
+
+main.home-main {
+    width: min(1100px, calc(100% - 138px)) !important;
+}
+
+@media (max-width: 620px) {
+    .side-nav {
+        width: 62px;
+    }
+
+    .side-nav:hover {
+        width: 220px;
+    }
+
+    .site-header,
+    main,
+    footer,
+    .messages-page {
+        margin-left: 62px;
+    }
+
+    body:has(.side-nav:hover) .site-header,
+    body:has(.side-nav:hover) main,
+    body:has(.side-nav:hover) footer,
+    body:has(.side-nav:hover) .messages-page {
+        margin-left: 220px;
+    }
+
+    main.home-main {
+        width: calc(100% - 24px) !important;
+    }
+}
