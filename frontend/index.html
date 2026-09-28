@@ -17,14 +17,14 @@
         <div class="header-user" id="header-user">
             <img src="../anexos_prova/imagens_usuarios/default.png" alt="Perfil" id="user-photo">
             <span id="user-name">@CarHub</span>
-            <button id="btn-perfil" class="profile-trigger" disabled aria-label="Abrir perfil">
+            <button id="btn-perfil" class="profile-trigger" aria-label="Abrir perfil ou login">
                 <span class="profile-chevron">⌄</span>
             </button>
         </div>
 
-        <div class="header-login">
-            <button id="btn-abrir-login" class="btn-dark">Login</button>
-            <button id="btn-logout-header" class="btn-dark hidden">Sair</button>
+        <!-- Controle de login mantido para o JavaScript; o acesso fica no perfil. -->
+        <div class="header-login hidden" aria-hidden="true">
+            <button id="btn-abrir-login" class="btn-dark" tabindex="-1">Login</button>
         </div>
     </header>
 
@@ -89,6 +89,7 @@
             <p><span id="perfil-publicacoes">0</span> Publicações</p>
             <button class="btn-borda" id="btn-suas-publicacoes">Suas publicações</button>
             <button class="btn-borda hidden" id="btn-abrir-cadastro-foto" style="margin-top: 0; border-top: none;">Cadastrar Fotografia</button>
+            <button class="btn-borda hidden" id="btn-logout-header" style="margin-top: 0;">Sair</button>
         </div>
     </div>
 
