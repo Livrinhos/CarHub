@@ -102,6 +102,128 @@
         <div class="gallery" id="gallery-container"></div>
     </main>
 
+
+    <!-- Área de Mensagens -->
+    <section class="messages-page hidden" id="messages-page">
+        <div class="messages-shell">
+            <aside class="messages-sidebar">
+                <div class="messages-sidebar-header">
+                    <div class="messages-title-row">
+                        <h1>Mensagens</h1>
+                        <button class="message-new-btn" id="message-new-btn" title="Nova mensagem" type="button">＋</button>
+                    </div>
+                    <div class="messages-search">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16 16 5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                        <input type="text" id="messages-search-input" placeholder="Pesquisar conversas">
+                    </div>
+                </div>
+
+                <div class="message-tabs">
+                    <button class="message-tab active" type="button">Todas</button>
+                    <button class="message-tab" type="button">Não lidas</button>
+                </div>
+
+                <div class="conversation-list" id="conversation-list">
+                    <button class="conversation active" type="button" data-user="JDM Brasil" data-status="Online">
+                        <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                        <span class="conversation-main">
+                            <strong>JDM Brasil</strong>
+                            <small>Você viu o novo Supra?</small>
+                        </span>
+                        <span class="conversation-meta">
+                            <time>12:42</time>
+                            <b class="unread-dot"></b>
+                        </span>
+                    </button>
+
+                    <button class="conversation" type="button" data-user="@carspotting_br" data-status="Ativo agora">
+                        <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                        <span class="conversation-main">
+                            <strong>@carspotting_br</strong>
+                            <small>Essa foto ficou absurda 🔥</small>
+                        </span>
+                        <span class="conversation-meta">
+                            <time>11:08</time>
+                        </span>
+                    </button>
+
+                    <button class="conversation" type="button" data-user="@trackday_br" data-status="Ativo há 8 min">
+                        <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                        <span class="conversation-main">
+                            <strong>@trackday_br</strong>
+                            <small>Partiu track day?</small>
+                        </span>
+                        <span class="conversation-meta">
+                            <time>Ontem</time>
+                        </span>
+                    </button>
+
+                    <button class="conversation" type="button" data-user="@speedshots" data-status="Ativo ontem">
+                        <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                        <span class="conversation-main">
+                            <strong>@speedshots</strong>
+                            <small>Te marquei numa publicação</small>
+                        </span>
+                        <span class="conversation-meta">
+                            <time>Ontem</time>
+                        </span>
+                    </button>
+                </div>
+            </aside>
+
+            <section class="chat-panel" id="chat-panel">
+                <div class="chat-empty hidden" id="chat-empty">
+                    <div class="chat-empty-icon">✉</div>
+                    <h2>Suas mensagens</h2>
+                    <p>Envie fotos, detalhes de carros e ideias para outros apaixonados por automóveis.</p>
+                    <button class="chat-primary-btn" type="button" id="chat-start-btn">Enviar mensagem</button>
+                </div>
+
+                <div class="chat-content" id="chat-content">
+                    <header class="chat-header">
+                        <div class="chat-person">
+                            <img src="../anexos_prova/imagens_usuarios/default.png" alt="" id="chat-avatar">
+                            <div>
+                                <strong id="chat-name">JDM Brasil</strong>
+                                <span id="chat-status">Online</span>
+                            </div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <button type="button" title="Informações">i</button>
+                            <button type="button" title="Mais opções">•••</button>
+                        </div>
+                    </header>
+
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-day">HOJE</div>
+                        <div class="chat-row received">
+                            <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                            <div class="bubble">Você viu o novo Supra?</div>
+                        </div>
+                        <div class="chat-row received">
+                            <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                            <div class="bubble">Aquele encontro de sábado vai ter várias JDM.</div>
+                        </div>
+                        <div class="chat-row sent">
+                            <div class="bubble">Vi sim! Vou passar lá para fotografar 📸</div>
+                        </div>
+                        <div class="chat-row received">
+                            <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                            <div class="bubble">Fechado. Depois me manda as fotos!</div>
+                        </div>
+                    </div>
+
+                    <form class="chat-composer" id="chat-composer">
+                        <button type="button" class="composer-icon" title="Adicionar arquivo">＋</button>
+                        <input type="text" id="chat-input" autocomplete="off" placeholder="Envie uma mensagem...">
+                        <button type="button" class="composer-icon emoji-button" title="Emoji">☺</button>
+                        <button type="submit" class="send-message-btn" title="Enviar">➤</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-left">CarHub</div>
         <div class="footer-center">
