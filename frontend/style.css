@@ -1917,3 +1917,44 @@ body:has(.side-nav:hover) .messages-page {
         margin: 0 auto;
     }
 }
+
+
+/* Feed com rolagem vertical */
+html,
+body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+main {
+    height: auto;
+    min-height: calc(100vh - 114px);
+    overflow: visible;
+}
+
+.home-main {
+    min-height: 0;
+}
+
+.feed-list {
+    overflow: visible;
+}
+
+/* A navegação continua fixa enquanto o feed rola */
+.side-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+}
+
+/* No celular, o conteúdo também pode rolar normalmente */
+@media (max-width: 620px) {
+    main {
+        height: auto;
+        min-height: calc(100vh - 108px);
+        overflow: visible;
+    }
+}
