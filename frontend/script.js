@@ -431,3 +431,97 @@ function atualizarImagemNavPerfil() {
 }
 
 atualizarImagemNavPerfil();
+
+
+/* ==========================================
+   NAVEGAÇÃO E COMPORTAMENTO DAS MENSAGENS
+   ========================================== */
+const navMessages = document.getElementById('nav-messages');
+const messagesPage = document.getElementById('messages-page');
+const homeMain = document.querySelector('main');
+const homeFooter = document.querySelector('footer');
+const conversations = document.querySelectorAll('.conversation');
+const chatName = document.getElementById('chat-name');
+const chatStatus = document.getElementById('chat-status');
+const chatInput = document.getElementById('chat-input');
+const chatMessages = document.getElementById('chat-messages');
+const chatComposer = document.getElementById('chat-composer');
+const messagesSearchInput = document.getElementById('messages-search-input');
+
+function ativarPagina(pagina) {
+    const mostrarMensagens = pagina === 'mensagens';
+
+    homeMain?.classList.toggle('hidden', mostrarMensagens);
+    homeFooter?.classList.toggle('hidden', mostrarMensagens);
+    messagesPage?.classList.toggle('hidden', !mostrarMensagens);
+
+    navHome?.classList.toggle('active', !mostrarMensagens);
+    navMessages?.classList.toggle('active', mostrarMensagens);
+}
+
+navMessages?.addEventListener('click', () => ativarPagina('mensagens'));
+navHome?.addEventListener('click', () => ativarPagina('inicio'));
+
+conversations.forEach(conversation => {
+    conversation.addEventListener('click', () => {
+        conversations.forEach(item => item.classList.remove('active'));
+        conversation.classList.add('active');
+
+        if (chatName) chatName.textContent = conversation.dataset.user || 'Usuário';
+        if (chatStatus) chatStatus.textContent = conversation.dataset.status || 'Ativo agora';
+
+        const dot = conversation.querySelector('.unread-dot');
+        dot?.remove();
+
+        if (chatMessages) {
+            chatMessages.innerHTML = `
+                <div class="chat-day">HOJE</div>
+                <div class="chat-row received">
+                    <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                    <div class="bubble">${conversation.querySelector('small')?.textContent || 'Olá! Tudo bem?'}</div>
+                </div>
+                <div class="chat-row sent">
+                    <div class="bubble">Fala! Vi sua mensagem aqui no CarHub.</div>
+                </div>
+            `;
+        }
+
+        chatInput?.focus();
+    });
+});
+
+messagesSearchInput?.addEventListener('input', () => {
+    const term = messagesSearchInput.value.trim().toLowerCase();
+
+    conversations.forEach(conversation => {
+        const text = conversation.innerText.toLowerCase();
+        conversation.classList.toggle('hidden', term && !text.includes(term));
+    });
+});
+
+chatComposer?.addEventListener('submit', event => {
+    event.preventDefault();
+
+    const message = chatInput?.value.trim();
+    if (!message || !chatMessages) return;
+
+    const row = document.createElement('div');
+    row.className = 'chat-row sent';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.textContent = message;
+
+    row.appendChild(bubble);
+    chatMessages.appendChild(row);
+    chatInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+
+document.getElementById('message-new-btn')?.addEventListener('click', () => {
+    chatInput?.focus();
+});
+
+document.getElementById('chat-start-btn')?.addEventListener('click', () => {
+    chatInput?.focus();
+});
