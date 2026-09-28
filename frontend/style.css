@@ -30,8 +30,8 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    min-height: 114px;
-    padding: 17px 7.5vw;
+    min-height: 82px;
+    padding: 10px 7.5vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -45,7 +45,7 @@ body {
 }
 
 .logo-image {
-    width: 225px;
+    width: 170px;
     height: auto;
     display: block;
 }
@@ -53,18 +53,18 @@ body {
 .header-user {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 9px;
     color: var(--white);
     font-weight: 600;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .header-user img {
-    width: 76px;
-    height: 76px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--orange);
+    border: 2px solid var(--orange);
 }
 
 #user-name {
@@ -72,8 +72,8 @@ body {
 }
 
 .profile-trigger {
-    width: 34px;
-    height: 34px;
+    width: 26px;
+    height: 26px;
     border: none;
     background: transparent;
     color: var(--white);
@@ -89,33 +89,33 @@ body {
 }
 
 .profile-chevron {
-    font-size: 27px;
+    font-size: 21px;
     line-height: 1;
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 main {
-    width: min(1250px, calc(100% - 40px));
+    width: min(1150px, calc(100% - 40px));
     margin: 0 auto;
-    padding: 26px 0 70px;
-    min-height: calc(100vh - 200px);
+    padding: 20px 0 55px;
+    min-height: calc(100vh - 138px);
 }
 
 .search-section {
     display: flex;
     justify-content: center;
-    margin: 0 auto 30px;
+    margin: 0 auto 25px;
 }
 
 .search-bar {
-    width: min(890px, 100%);
-    height: 60px;
+    width: min(760px, 100%);
+    height: 48px;
     display: flex;
     align-items: center;
     background: var(--white);
     border: 1px solid #bfc2c4;
-    border-radius: 7px;
-    padding: 0 16px 0 18px;
+    border-radius: 6px;
+    padding: 0 13px 0 14px;
     box-shadow: 0 1px 2px rgba(0,0,0,.04);
 }
 
@@ -130,7 +130,7 @@ main {
     outline: none;
     background: transparent;
     color: var(--text);
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .search-bar input::placeholder {
@@ -138,8 +138,8 @@ main {
 }
 
 .search-bar button {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -148,14 +148,14 @@ main {
 }
 
 .search-bar button img {
-    width: 27px;
-    height: 27px;
+    width: 23px;
+    height: 23px;
 }
 
 .gallery {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px;
+    gap: 20px;
 }
 
 .card {
@@ -174,7 +174,7 @@ main {
 
 .card img.foto-pub {
     width: 100%;
-    height: 300px;
+    height: 255px;
     object-fit: cover;
     display: block;
     transition: transform .25s ease;
@@ -202,16 +202,16 @@ main {
 }
 
 .card-info {
-    min-height: 60px;
-    padding: 13px 16px;
+    min-height: 52px;
+    padding: 10px 13px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 12px;
 }
 
 .card-info h3 {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -249,11 +249,11 @@ footer {
     gap: 20px;
     background: var(--header);
     color: var(--white);
-    padding: 20px 7.5vw;
+    padding: 14px 7.5vw;
 }
 
 .footer-left {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -263,13 +263,13 @@ footer {
 }
 
 .footer-center img {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 
 .footer-right {
-    font-size: 13px;
+    font-size: 12px;
     color: #c5c8ca;
 }
 
