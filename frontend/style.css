@@ -1887,3 +1887,33 @@ body:has(.side-nav:hover) .messages-page {
         gap: 1px;
     }
 }
+
+
+/* Home centralizada na área disponível, mantendo feed + coluna lateral juntos */
+.home-main {
+    width: min(1078px, 100%);
+    margin: 0 auto;
+    grid-template-columns: minmax(0, 760px) 300px;
+    justify-content: center;
+}
+
+.home-feed {
+    width: 100%;
+}
+
+.home-right-column {
+    width: 300px;
+}
+
+@media (max-width: 1120px) {
+    .home-main {
+        width: 100%;
+    }
+}
+
+@media (max-width: 980px) {
+    .home-main {
+        width: min(760px, 100%);
+        margin: 0 auto;
+    }
+}
