@@ -6,7 +6,7 @@
 }
 
 :root {
-    --bg: #f1f1eb;
+    --bg: #222224;
     --header: #080c0e;
     --text: #111315;
     --muted: #6f7377;
@@ -958,4 +958,23 @@ body:has(.side-nav:hover) main {
         margin-left: 220px;
         width: calc(100% - 220px);
     }
+}
+
+
+/* Fundo unificado */
+html,
+body,
+main {
+    background: #222224;
+}
+
+/* Linha e sombra sutis para dar profundidade ao header */
+.site-header {
+    border-bottom: 1px solid #343438;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.28),
+                0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+.side-nav {
+    border-right: 1px solid #343438;
 }
