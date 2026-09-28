@@ -89,17 +89,82 @@
         </div>
     </header>
 
-    <main>
-        <div class="search-section">
-            <div class="search-bar">
-                <input type="text" id="input-pesquisa" placeholder="No que você está pensando, @fotografo_1?">
-                <button id="btn-pesquisar" aria-label="Pesquisar">
-                    <img src="../anexos_prova/icones/lupa.svg" alt="">
-                </button>
-            </div>
+    <main class="home-main" id="home-main">
+        <div class="home-feed">
+            <section class="post-composer">
+                <div class="composer-top">
+                    <img id="composer-avatar" class="composer-avatar" src="../anexos_prova/imagens_usuarios/default.png" alt="Perfil">
+                    <button class="composer-input" id="composer-focus" type="button">No que você está pensando, <span id="composer-mention">@fotografo_1</span>?</button>
+                </div>
+
+                <div class="composer-actions">
+                    <button type="button" class="composer-action" id="composer-photo">
+                        <span class="composer-action-icon">▣</span>
+                        <span>Foto</span>
+                    </button>
+                    <button type="button" class="composer-action">
+                        <span class="composer-action-icon">▶</span>
+                        <span>Vídeo</span>
+                    </button>
+                    <button type="button" class="composer-action">
+                        <span class="composer-action-icon">▤</span>
+                        <span>Enquete</span>
+                    </button>
+                    <button type="button" class="publish-button" id="composer-publish">Publicar</button>
+                </div>
+            </section>
+
+            <section class="feed-toolbar">
+                <div>
+                    <strong>Para você</strong>
+                    <span>Descubra as publicações da comunidade CarHub</span>
+                </div>
+                <button type="button" id="feed-refresh" class="feed-refresh">Atualizar</button>
+            </section>
+
+            <div class="feed-list" id="gallery-container"></div>
         </div>
 
-        <div class="gallery" id="gallery-container"></div>
+        <aside class="home-right-column">
+            <section class="home-widget">
+                <div class="widget-header">
+                    <strong>Pesquise no CarHub</strong>
+                </div>
+                <div class="widget-search">
+                    <img src="../anexos_prova/icones/lupa.svg" alt="">
+                    <input type="text" id="input-pesquisa" placeholder="Pesquisar carros, usuários...">
+                    <button id="btn-pesquisar" type="button">Pesquisar</button>
+                </div>
+            </section>
+
+            <section class="home-widget">
+                <div class="widget-header">
+                    <strong>Assuntos em alta</strong>
+                    <span>Ver todos</span>
+                </div>
+                <div class="trend-item"><b>#JDM</b><small>12.6K publicações</small></div>
+                <div class="trend-item"><b>#CarrosAntigos</b><small>8.3K publicações</small></div>
+                <div class="trend-item"><b>#BMW</b><small>7.9K publicações</small></div>
+                <div class="trend-item"><b>#Supesportivos</b><small>5.1K publicações</small></div>
+            </section>
+
+            <section class="home-widget">
+                <div class="widget-header">
+                    <strong>Quem seguir</strong>
+                    <span>Ver todos</span>
+                </div>
+                <div class="follow-item">
+                    <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                    <div><b>@speedshots</b><small>Fotografia automotiva</small></div>
+                    <button>Seguir</button>
+                </div>
+                <div class="follow-item">
+                    <img src="../anexos_prova/imagens_usuarios/default.png" alt="">
+                    <div><b>@trackday_br</b><small>Track Day / Pista</small></div>
+                    <button>Seguir</button>
+                </div>
+            </section>
+        </aside>
     </main>
 
 
