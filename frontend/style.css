@@ -721,3 +721,31 @@ main {
     border-radius: 9px;
     font-size: 22px;
 }
+
+
+/* Corrige a largura da página para a sidebar não aumentar a viewport */
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+main {
+    width: calc(100% - 74px);
+    max-width: 1150px;
+}
+
+body:has(.side-nav:hover) main {
+    width: calc(100% - 245px);
+}
+
+@media (max-width: 620px) {
+    main {
+        width: calc(100% - 62px);
+    }
+
+    body:has(.side-nav:hover) main {
+        width: calc(100% - 220px);
+    }
+}
