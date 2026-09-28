@@ -2044,3 +2044,109 @@ body:has(.side-nav:hover) main.home-main {
         margin-right: auto !important;
     }
 }
+
+
+/* Modal do CarHub — contraste e cores da identidade */
+.modal {
+    background: rgba(0, 0, 0, 0.68);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    background: #17191b;
+    color: #f5f5f5;
+    border: 1px solid #303337;
+    box-shadow: 0 22px 55px rgba(0,0,0,.42);
+}
+
+.modal-header {
+    border-bottom: 1px solid #2d3033;
+    padding-bottom: 14px;
+}
+
+.modal-header h2 {
+    color: #ffffff;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.close-btn {
+    color: #f1f1f1;
+}
+
+.close-btn:hover {
+    color: var(--orange);
+}
+
+.form-group label {
+    color: #f3f4f5;
+}
+
+.form-group p {
+    color: #858b90;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    background: #232629;
+    color: #ffffff;
+    border: 1px solid #3a3e42;
+    border-radius: 7px;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="password"]::placeholder {
+    color: #8b9196;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: var(--orange);
+    box-shadow: 0 0 0 2px rgba(255,135,0,.12);
+}
+
+.modal-footer {
+    border-top: 1px solid #2d3033;
+    padding-top: 14px;
+}
+
+.modal .btn-dark {
+    background: var(--orange);
+    color: #111315;
+    border-color: var(--orange);
+    font-weight: 700;
+}
+
+.modal .btn-dark:hover {
+    background: #ff981f;
+}
+
+.modal .btn-outline {
+    color: #f1f1f1;
+    background: #232629;
+    border-color: #45494d;
+}
+
+.modal .btn-outline:hover {
+    background: #2b2f33;
+}
+
+#contador,
+#nome-arquivo-selecionado {
+    color: #858b90;
+}
+
+#btn-escolher-arquivo {
+    background: #232629;
+    color: #f1f1f1;
+    border-color: #45494d;
+}
+
+#btn-escolher-arquivo:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+}
+
+.error-msg {
+    color: #ff6b6b;
+}
