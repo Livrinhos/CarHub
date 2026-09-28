@@ -32,6 +32,10 @@ const galleryContainer = document.getElementById('gallery-container');
 // INICIALIZAÇÃO
 // ==========================================
 window.onload = () => {
+    modalLogin.classList.add('hidden');
+    modalCadastroFoto.classList.add('hidden');
+    menuLateral.classList.add('hidden');
+
     const usuarioSalvo = localStorage.getItem('usuarioLogado');
 
     if (usuarioSalvo) {
@@ -51,9 +55,6 @@ function abrirModalLogin() {
 }
 
 btnAbrirLogin?.addEventListener('click', abrirModalLogin);
-    modalLogin.classList.remove('hidden');
-    document.getElementById('erro-credenciais').classList.add('hidden');
-});
 
 const fecharModalLogin = () => {
     modalLogin.classList.add('hidden');
